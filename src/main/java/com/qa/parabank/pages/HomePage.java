@@ -10,13 +10,21 @@ public class HomePage {
 	{
 		this.driver=driver;
 	}
+	By textLocator=By.xpath("//h1");
 	private By register=By.xpath("//a[text()='Register']");
+	private By forgotLoginInfo=By.xpath("//a[text()='Forgot login info?']");
 	
 	public RegisterPage doClick()
 	{
 		WebElement regClick=driver.findElement(register);
 		regClick.click();
-		return new RegisterPage();
+		return new RegisterPage(driver);
+	}
+	public String headerMessage()
+	{
+		String text=driver.findElement(textLocator).getText();
+		System.out.println(text);
+		return text;
 	}
 
 }

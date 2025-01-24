@@ -5,11 +5,15 @@ package com.qa.parabank.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import com.qa.parabank.utilies.ElementUtil;
+
 public class RegisterPage {
 	private WebDriver driver=null;
+	ElementUtil ele=null;
 	public RegisterPage(WebDriver driver)
 	{
 		this.driver=driver;
+		ele=new ElementUtil(driver);
 	}
 	private By firstName=By.name("customer.firstName");
 	private By lastName=By.name("customer.lastName");
@@ -28,19 +32,19 @@ public class RegisterPage {
 	{
 		By textLocator=By.xpath("//h1/../p");
 		String username=""+System.currentTimeMillis();
-		driver.findElement(firstName).sendKeys("vinutha");
-		driver.findElement(lastName).sendKeys("T");
-		driver.findElement(address).sendKeys("536,Bellandur");
-		driver.findElement(city).sendKeys("Bangalore");
-		driver.findElement(state).sendKeys("Karnataka");
-		driver.findElement(zipCode).sendKeys("56301");
-		driver.findElement(phone).sendKeys("8965234710");
-		driver.findElement(ssn).sendKeys("853");
-		driver.findElement(userName).sendKeys(username);
-		driver.findElement(password).sendKeys("vinutha@29");
-		driver.findElement(confirmpassword).sendKeys("vinutha@29");
-		driver.findElement(submit).click();
-		String text=driver.findElement(textLocator).getText();
+		ele.doSend(firstName, "vinutha");
+		ele.doSend(lastName,"T");
+		ele.doSend(address,"536,Bellandur");
+		ele.doSend(city,"Bangalore");
+		ele.doSend(state,"Karnataka");
+		ele.doSend(zipCode,"56301");
+		ele.doSend(phone,"8965234710");
+		ele.doSend(ssn,"853");
+		ele.doSend(userName,username);
+		ele.doSend(password,"vinutha@29");
+		ele.doSend(confirmpassword,"vinutha@29");
+		ele.doClick(submit);
+		String text=ele.myGetText(textLocator);
 		System.out.println(text);
 		return text;
 		
